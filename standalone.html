@@ -50,20 +50,38 @@
 /* glass：透亮银白玻璃（默认，贴近资料图的银白/浅灰/羽翼质感） */
 [data-theme="glass"]{
   --bg-a:#f8fafc; --bg-b:#eaf0f6; --bg-c:#dde6f0; --bg-d:#fcfdff;
-  --ink:#1b2634; --ink-2:rgba(27,38,52,.78); --ink-3:rgba(27,38,52,.52);
-  --glass:rgba(255,255,255,.54); --glass-2:rgba(255,255,255,.34);
-  --line:rgba(255,255,255,.94); --line-soft:rgba(255,255,255,.66);
-  --accent:#6d8299; --shadow:0 18px 56px rgba(86,112,145,.20);
+  --ink:#16212e; --ink-2:rgba(22,33,46,.84); --ink-3:rgba(22,33,46,.58);
+  --glass:rgba(255,255,255,.30); --glass-2:rgba(255,255,255,.15);
+  --line:rgba(255,255,255,.98); --line-soft:rgba(255,255,255,.72);
+  --accent:#5d7691; --shadow:0 18px 56px rgba(86,112,145,.18);
 }
 [data-theme="glass"] #glowA{background:radial-gradient(circle,#ffffff,transparent 70%);opacity:.8}
 [data-theme="glass"] #glowB{background:radial-gradient(circle,#d9e5f2,transparent 70%);opacity:.72}
-[data-theme="glass"] #grain{opacity:.07}
-[data-theme="glass"] .glass,[data-theme="glass"] .albumItem,[data-theme="glass"] .appIcon{border-color:rgba(148,170,196,.30)}
-[data-theme="glass"] .appIcon{box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 8px 20px rgba(90,115,145,.18)}
-[data-theme="glass"] .stickyNote{background:linear-gradient(150deg,rgba(255,255,255,.82),rgba(255,255,255,.44));border-color:rgba(148,170,196,.32)}
-[data-theme="glass"] .bubbleRow.me .bubble{background:rgba(118,150,186,.26);border-color:rgba(255,255,255,.92)}
-[data-theme="glass"] .tabbar{box-shadow:0 -10px 34px rgba(110,135,165,.14)}
+[data-theme="glass"] #grain{opacity:.055}
+[data-theme="glass"] #bgLayer{opacity:.72}
+[data-theme="glass"] .glass,[data-theme="glass"] .albumItem,[data-theme="glass"] .appIcon{border-color:rgba(255,255,255,.80)}
+/* 细边框提亮边缘：每块玻璃一圈 1px 内高光 + 顶部亮线 */
+[data-theme="glass"] .glass,[data-theme="glass"] .albumItem,[data-theme="glass"] .appIcon,[data-theme="glass"] .stickyNote,[data-theme="glass"] .metaBox,[data-theme="glass"] .focusCard,[data-theme="glass"] .musicCard{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.62),inset 0 1px 0 rgba(255,255,255,.92),0 8px 24px rgba(92,118,148,.13);
+}
+[data-theme="glass"] .appIcon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),inset 0 1px 0 rgba(255,255,255,.95),0 8px 20px rgba(90,115,145,.14)}
+[data-theme="glass"] .stickyNote{background:linear-gradient(150deg,rgba(255,255,255,.70),rgba(255,255,255,.34));border-color:rgba(255,255,255,.82)}
+[data-theme="glass"] .bubbleRow.me .bubble{background:rgba(118,150,186,.26);border-color:rgba(255,255,255,.95)}
+[data-theme="glass"] .tabbar{box-shadow:0 -10px 34px rgba(110,135,165,.12),inset 0 1px 0 rgba(255,255,255,.9)}
 [data-theme="glass"] .admin .iconBtn{color:rgba(235,244,255,.86);border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.08)}
+/* 手机外壳：更透的玻璃 + 一圈细亮描边 */
+[data-theme="glass"] .phone{
+  background:linear-gradient(165deg,rgba(255,255,255,.22),rgba(255,255,255,.09));
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:var(--shadow),
+    inset 0 0 0 1px rgba(255,255,255,.55),
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 0 34px rgba(255,255,255,.22),
+    0 0 0 1px rgba(255,255,255,.30);
+}
+[data-theme="glass"] .phone::before{
+  background:linear-gradient(118deg,rgba(255,255,255,.42),rgba(255,255,255,0) 22%,rgba(255,255,255,0) 76%,rgba(255,255,255,.16));
+}
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
@@ -100,13 +118,16 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(165deg,var(--glass),var(--glass-2));
   -webkit-backdrop-filter:blur(26px) saturate(165%);backdrop-filter:blur(26px) saturate(165%);
   border:1px solid var(--line);
-  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.22),inset 0 0 60px rgba(140,190,240,.06);
+  box-shadow:var(--shadow),inset 0 0 0 1px rgba(255,255,255,.30),inset 0 1px 0 rgba(255,255,255,.42),inset 0 0 60px rgba(140,190,240,.06);
   display:flex;flex-direction:column;
 }
+/* 细边框提亮边缘：一圈高光内描边，玻璃边缘更立体 */
 .phone::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:9;border-radius:52px;
-  background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 24%,transparent 74%,rgba(255,255,255,.06));}
-.phone::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(90% 60% at 50% 0%,rgba(190,220,255,.11),transparent 70%);}
+  background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 24%,transparent 74%,rgba(255,255,255,.06));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.42),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(255,255,255,.18);}
+.phone::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:52px;
+  background:radial-gradient(90% 60% at 50% 0%,rgba(190,220,255,.11),transparent 70%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.34),inset 0 1px 2px rgba(255,255,255,.5);}
 
 /* 侧边装饰 */
 .sideMark{position:absolute;z-index:10;display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.32em;color:var(--ink-3);writing-mode:vertical-rl}
@@ -423,15 +444,24 @@ body.adminOpen .overlay{pointer-events:none}
 
 /* ============ 进场动画：起雾车窗 / 雨滴 / 擦玻璃 ============ */
 .intro{position:fixed;inset:0;z-index:100;overflow:hidden;background:#eef3f8;
+  touch-action:none;-webkit-user-select:none;user-select:none;cursor:crosshair;
   transition:opacity 1.05s ease,transform 1.2s cubic-bezier(.22,1,.36,1)}
 .intro.done{opacity:0;transform:scale(1.055);pointer-events:none}
 .introBg,.introFog{position:absolute;inset:-5%;background-size:cover;background-position:center;background-repeat:no-repeat}
 .introBg{z-index:1;filter:brightness(1.05) contrast(.97)}
-.introFog{z-index:2;filter:blur(14px) brightness(1.12) saturate(.74);transform:scale(1.09);transition:opacity .9s ease}
+.introFog{z-index:2;filter:blur(10px) brightness(1.05) saturate(.82);transform:scale(1.06);
+  transition:opacity .9s ease;will-change:opacity}
 .introFog::after{content:"";position:absolute;inset:0;
-  background:radial-gradient(110% 80% at 34% 22%,rgba(255,255,255,.60),transparent 72%),
-              linear-gradient(180deg,rgba(255,255,255,.42),rgba(233,241,249,.48))}
+  background:radial-gradient(110% 80% at 34% 22%,rgba(255,255,255,.46),transparent 74%),
+              linear-gradient(180deg,rgba(255,255,255,.30),rgba(233,241,249,.36))}
 .introFog.clear{opacity:0}
+/* 手动擦除进度条 */
+.introProg{position:absolute;left:50%;transform:translateX(-50%);
+  bottom:calc(84px + env(safe-area-inset-bottom));z-index:7;width:min(190px,52vw);height:2px;
+  border-radius:4px;background:rgba(58,78,102,.18);overflow:hidden;pointer-events:none}
+.introProg i{display:block;height:100%;width:0%;border-radius:4px;
+  background:linear-gradient(90deg,rgba(96,126,158,.55),#3d5670);transition:width .16s linear}
+.introProg.done{opacity:0;transition:opacity .5s}
 .introLayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 #introClear{z-index:3}
 #introRain{z-index:4}
@@ -484,7 +514,8 @@ body.adminOpen .overlay{pointer-events:none}
     <div class="introSub" id="introSub">LÍ ZǏ — 病恋档案</div>
     <div class="introRule"></div>
   </div>
-  <div class="introTip" id="introTip">轻触屏幕，擦去雾气</div>
+  <div class="introProg" id="introProg"><i id="introProgBar"></i></div>
+  <div class="introTip" id="introTip">用手指或鼠标，擦去玻璃上的雾</div>
   <button class="introSkip" id="introSkip">跳过 †</button>
 </div>
 
@@ -545,7 +576,7 @@ body.adminOpen .overlay{pointer-events:none}
 <script>
 /* 厘子 · 病恋档案 —— 默认数据（所有字段均可在后台编辑） */
 window.DEFAULTS = {
-  version: 2,
+  version: 3,
   password: 'lizi0217',
   theme: 'glass',             // glass 透亮玻璃(默认) | blue | noir | mono | custom
   bgImage: '',                // 自定义背景图 dataURL
@@ -553,14 +584,16 @@ window.DEFAULTS = {
   bgDim: 10,
   rainOn: true,
   rainLevel: 70,
+  rainSpeed: 42,              // 雨滴滑落速度（10 极慢 ~ 100 原速）
 
   intro: {
     on: true,
     image: 'assets/intro.jpg',   // 进场底图（可在后台换成相册图片）
     title: '厘 子',
     sub: 'LÍ ZǏ — 病恋档案',
-    tip: '轻触屏幕，擦去雾气',
-    skip: '跳过 †'
+    tip: '用手指或鼠标，擦去玻璃上的雾',
+    skip: '跳过 †',
+    need: 38                    // 擦除达到该比例(%)后进入
   },
 
   status: {
@@ -606,10 +639,10 @@ window.DEFAULTS = {
     title: '相册 · ARCHIVE',
     hint: '点击图片放大 · 右上角 ↗ 可跳转',
     items: [
-      { img: '', text: '窗上的雨，替我记了日期。', link: '', showLink: false, linkLabel: '↗' },
-      { img: '', text: '十字架落在锁骨的位置。', link: '', showLink: false, linkLabel: '↗' },
-      { img: '', text: '蓝屏之前的最后一次存档。', link: '', showLink: false, linkLabel: '↗' },
-      { img: '', text: '她没有回信，但信号一直亮着。', link: '', showLink: false, linkLabel: '↗' }
+      { img: 'assets/album1.jpg', text: 'You and Me, for every day. †', link: '', showLink: false, linkLabel: '↗' },
+      { img: 'assets/album2.jpg', text: '乘风破浪，也只是一张旧素描。', link: '', showLink: false, linkLabel: '↗' },
+      { img: 'assets/album3.jpg', text: 'Finance · 一封没有寄出的旅行票。', link: '', showLink: false, linkLabel: '↗' },
+      { img: 'assets/album4.jpg', text: 'Midnights · 把想念刻进唱片的纹路。', link: '', showLink: false, linkLabel: '↗' }
     ]
   },
 
@@ -630,12 +663,12 @@ window.DEFAULTS = {
       { text: '离线中 / OFFLINE BUT AWAKE', link: '' }
     ],
     music: {
-      title: '未载入音轨',
-      artist: '插入音乐链接后自动播放',
-      url: '',
-      cover: '',
+      title: '未寄出的录音',
+      artist: '厘子 · 内置音轨',
+      url: 'assets/bgm.mp3',
+      cover: 'assets/album4.jpg',
       auto: true,
-      mode: 'link'
+      mode: 'file'
     }
   },
 
@@ -769,6 +802,27 @@ function loadLocal() {
         old.theme = 'glass'; old.bgDim = 10; old.bgBlur = 2;
         if (!old.intro) old.intro = clone(window.DEFAULTS.intro);
         old.version = 2;
+      }
+      // v3：内置相册图 / 内置 MP3 / 手动擦除文案 —— 只在仍是默认空值时补齐，绝不覆盖用户自己上传或改过的内容
+      if (old.version < 3) {
+        var D = window.DEFAULTS;
+        if (old.album && Array.isArray(old.album.items)) {
+          old.album.items.forEach(function (it, i) {
+            if (!it.img && D.album.items[i] && D.album.items[i].img) {
+              it.img = D.album.items[i].img;
+              if (!it.text || /^(窗上的雨|十字架落在|蓝屏之前|她没有回信)/.test(it.text)) it.text = D.album.items[i].text;
+            }
+          });
+        }
+        if (old.home && old.home.music && !old.home.music.url) {
+          var m = D.home.music;
+          old.home.music.url = m.url; old.home.music.cover = m.cover;
+          if (!old.home.music.title || old.home.music.title === '未载入音轨') old.home.music.title = m.title;
+          if (!old.home.music.artist || /插入音乐链接/.test(old.home.music.artist)) old.home.music.artist = m.artist;
+          old.home.music.auto = true;
+        }
+        if (old.intro && (!old.intro.tip || old.intro.tip === '轻触屏幕，擦去雾气')) old.intro.tip = D.intro.tip;
+        old.version = 3;
       }
       S = merge(window.DEFAULTS, old);
     }
@@ -1359,9 +1413,10 @@ function renderAdmin() {
       imgFld('自定义网站背景图', 'bgImage', 2400) +
       fld('背景模糊 px', 'bgBlur', 'range', { min: 0, max: 20 }) +
       fld('背景暗度 %', 'bgDim', 'range', { min: 0, max: 90 }) +
-      '<label class="sw"><span>雨滴滑落特效</span><input type="checkbox" data-bind="rainOn" ' + (S.rainOn !== false ? 'checked' : '') + '></label>' +
+      '<label class="sw"><span>仿真雨滴特效（凝珠 / 汇流 / 水痕）</span><input type="checkbox" data-bind="rainOn" ' + (S.rainOn !== false ? 'checked' : '') + '></label>' +
       fld('雨滴密度', 'rainLevel', 'range', { min: 10, max: 120 }) +
-      '<div class="hint">背景图、主题、雨滴均为全站生效；切换后即时预览。</div></div></details>' +
+      fld('雨滴滑落速度（越小越慢）', 'rainSpeed', 'range', { min: 8, max: 100 }) +
+      '<div class="hint">背景图、主题、雨滴均为全站生效；切换后即时预览。玻璃已调为透亮半透，边缘带一圈细亮描边。</div></div></details>' +
 
     '<details class="sec" data-sec="intro"><summary>进场动画 / 擦玻璃 · 雨滴车窗</summary><div class="in">' +
       '<label class="sw"><span>开启进场动画</span><input type="checkbox" data-bind="intro.on" ' + (S.intro.on !== false ? 'checked' : '') + '></label>' +
@@ -1369,8 +1424,9 @@ function renderAdmin() {
       fld('副标文字', 'intro.sub') +
       fld('底部提示文字', 'intro.tip') +
       fld('跳过按钮文字', 'intro.skip') +
+      fld('擦开多少 % 后进入', 'intro.need', 'range', { min: 12, max: 75 }) +
       imgFld('进场背景底图（默认已用你的资料图）', 'intro.image', 2400) +
-      '<div class="hint">开场为一块起雾的车窗玻璃：大大小小的雨滴不断打上来、带着高光与滑落水痕；抹布式擦拭逐渐把雾擦开露出清晰底图，中间文字随之显现，随后淡出进入主站。可轻触/滑动屏幕自己擦，或点「跳过」。所有文字与底图都可改。</div></div></details>' +
+      '<div class="hint">开场是一块起雾的车窗：大小不一的仿真雨滴打上玻璃、带涟漪与缓慢滑落的水痕。<b>必须用手指或鼠标在屏幕上滑动把雾擦开</b>，底部进度条走满后自动擦净并进入主站；不想擦可点「跳过」。所有文字与底图都可改。</div></div></details>' +
 
     '<details class="sec" data-sec="bar"><summary>状态栏 / 顶栏 / 底栏（所有文字与图片）</summary><div class="in">' +
       '<label class="sw"><span>状态栏时间跟随手机实时时钟</span><input type="checkbox" data-bind="status.autoTime" ' + (S.status.autoTime !== false ? 'checked' : '') + '></label>' +
@@ -1577,57 +1633,126 @@ function exportData() {
   setTimeout(function () { URL.revokeObjectURL(a.href); }, 3000); toast('数据已导出');
 }
 
-/* ============ 雨滴滑落（窗上水珠 + 拖尾 + 折射高光） ============ */
+/* ============ 仿真雨滴：静态凝珠 / 间歇滑落 / 汇流长大 / 水痕蒸发 / 折射高光 ============ */
 function initRain() {
-  var cv = $('#rain'), cx = cv.getContext('2d'), drops = [], W = 0, H = 0, dpr = 1, raf = 0;
+  var cv = $('#rain'), cx = cv.getContext('2d');
+  var trail = document.createElement('canvas'), tx = trail.getContext('2d');  // 水痕层（缓慢蒸发）
+  var W = 0, H = 0, dpr = 1, raf = 0, beads = [], runners = [];
+  function speed() { var v = S.rainSpeed == null ? 42 : Number(S.rainSpeed); return Math.max(.12, Math.min(1.6, v / 42)); }
+  function light() { var t = document.documentElement.getAttribute('data-theme'); return t === 'glass' || t === 'blue'; }
   function resize() {
     dpr = Math.min(2, window.devicePixelRatio || 1);
     W = window.innerWidth; H = window.innerHeight;
     cv.width = W * dpr; cv.height = H * dpr;
     cv.style.width = W + 'px'; cv.style.height = H + 'px';
     cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    trail.width = W * dpr; trail.height = H * dpr;
+    tx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
-  function mk(init) {
-    return { x: Math.random() * W, y: init ? Math.random() * H : -20 - Math.random() * H * .4,
-      r: 1 + Math.random() * 3.4, v: .12 + Math.random() * .55, tail: 0, len: 0, wob: Math.random() * 6.28 };
+  /* 贴在玻璃上的静态凝珠：数量多、大小悬殊、几乎不动 */
+  function mkBead(init) {
+    return { x: Math.random() * W, y: init ? Math.random() * H : -24,
+      r: .7 + Math.pow(Math.random(), 2.1) * 4.6,
+      ph: Math.random() * 6.28, rip: init ? 0 : 1 };
+  }
+  /* 滑落水珠：走走停停（表面张力），会吞并沿途凝珠而长大 */
+  function mkRun(init) {
+    return { x: Math.random() * W, y: init ? Math.random() * H : -30 - Math.random() * H * .3,
+      r: 3.0 + Math.random() * 4.8, v: .02 + Math.random() * .06,
+      pause: Math.random() * 90, wob: Math.random() * 6.28,
+      drift: (Math.random() - .5) * .16, py: 0 };
   }
   function refill() {
-    var n = Math.min(110, Math.round((S.rainLevel || 70) * 1.15));
-    while (drops.length < n) drops.push(mk(true));
-    if (drops.length > n) drops.length = n;
+    var lv = S.rainLevel == null ? 70 : Number(S.rainLevel);
+    var nb = Math.min(240, Math.round(lv * 1.9));
+    var nr = Math.max(3, Math.round(lv / 12));
+    while (beads.length < nb) beads.push(mkBead(true));
+    if (beads.length > nb) beads.length = nb;
+    while (runners.length < nr) runners.push(mkRun(true));
+    if (runners.length > nr) runners.length = nr;
+  }
+  /* 单颗水珠的凸透镜质感：亮心 → 冷灰环 → 底部暗影 → 高光点 → 细描边 */
+  function drawDrop(c, x, y, r, lit, alpha) {
+    if (r < .35) return;
+    c.save(); c.globalAlpha = alpha == null ? 1 : alpha;
+    var ry = r * 1.10;
+    var g = c.createRadialGradient(x - r * .34, y - r * .42, 0, x, y, r * 1.5);
+    g.addColorStop(0, lit ? 'rgba(255,255,255,.96)' : 'rgba(255,255,255,.72)');
+    g.addColorStop(.30, lit ? 'rgba(226,238,250,.40)' : 'rgba(198,224,252,.30)');
+    g.addColorStop(.74, lit ? 'rgba(126,156,188,.26)' : 'rgba(120,160,210,.18)');
+    g.addColorStop(1, lit ? 'rgba(78,108,142,.10)' : 'rgba(150,195,240,.02)');
+    c.fillStyle = g; c.beginPath(); c.ellipse(x, y, r, ry, 0, 0, 6.283); c.fill();
+    // 底部暗影（折射下沉）
+    c.fillStyle = lit ? 'rgba(64,92,124,.16)' : 'rgba(10,26,48,.22)';
+    c.beginPath(); c.ellipse(x + r * .06, y + ry * .52, r * .72, ry * .30, 0, 0, 6.283); c.fill();
+    // 边缘细描边
+    c.strokeStyle = lit ? 'rgba(70,102,138,.28)' : 'rgba(210,232,255,.22)';
+    c.lineWidth = .7; c.beginPath(); c.ellipse(x, y, r, ry, 0, 0, 6.283); c.stroke();
+    // 左上主高光 + 右下小反光
+    c.fillStyle = 'rgba(255,255,255,.95)';
+    c.beginPath(); c.arc(x - r * .36, y - ry * .42, Math.max(.55, r * .21), 0, 6.283); c.fill();
+    c.fillStyle = lit ? 'rgba(255,255,255,.55)' : 'rgba(210,232,255,.42)';
+    c.beginPath(); c.arc(x + r * .34, y + ry * .34, Math.max(.35, r * .10), 0, 6.283); c.fill();
+    c.restore();
   }
   function frame() {
     raf = 0;
     if (document.hidden || S.rainOn === false) return;
-    var th = document.documentElement.getAttribute('data-theme');
-    var light = (th === 'glass' || th === 'blue');
+    var lit = light(), sp = speed();
     cx.clearRect(0, 0, W, H);
-    for (var i = 0; i < drops.length; i++) {
-      var d = drops[i];
-      d.v += .0016; d.y += d.v * (1 + d.r / 4); d.wob += .02;
-      d.x += Math.sin(d.wob) * .12;
-      if (d.y > 20 && d.tail < 1 && Math.random() < .012) d.tail = 1;
-      if (d.tail) { d.len += .9; if (d.len > 90 + d.r * 22) { d.len = 0; d.tail = 0; } }
-      if (d.len > 0) {
-        var g2 = cx.createLinearGradient(d.x, d.y - d.len, d.x, d.y);
-        g2.addColorStop(0, (light ? 'rgba(120,145,175,0)' : 'rgba(215,235,255,0)'));
-        g2.addColorStop(1, (light ? 'rgba(120,145,175,' : 'rgba(215,235,255,') + (.05 + d.r * .012) + ')');
-        cx.fillStyle = g2;
-        cx.fillRect(d.x - d.r * .34, d.y - d.len, d.r * .68, d.len);
+    // 水痕缓慢蒸发
+    tx.save(); tx.globalCompositeOperation = 'destination-out';
+    tx.fillStyle = 'rgba(0,0,0,.010)'; tx.fillRect(0, 0, W, H); tx.restore();
+    // 合成已有水痕（淡）
+    cx.save(); cx.globalAlpha = lit ? .5 : .45;
+    cx.drawImage(trail, 0, 0, W, H); cx.restore();
+
+    // 静态凝珠
+    for (var i = 0; i < beads.length; i++) {
+      var b = beads[i];
+      b.ph += .012;
+      if (b.rip > 0) {
+        b.rip -= .03;
+        cx.strokeStyle = (lit ? 'rgba(90,120,152,' : 'rgba(220,238,255,') + (b.rip * .35) + ')';
+        cx.lineWidth = .8; cx.beginPath();
+        cx.ellipse(b.x, b.y, b.r * (1 + (1 - b.rip) * 3), b.r * (1 + (1 - b.rip) * 3), 0, 0, 6.283); cx.stroke();
       }
-      var g = cx.createRadialGradient(d.x - d.r * .3, d.y - d.r * .4, 0, d.x, d.y, d.r * 1.5);
-      g.addColorStop(0, light ? 'rgba(255,255,255,.92)' : 'rgba(255,255,255,.55)');
-      g.addColorStop(.32, light ? 'rgba(146,171,200,.30)' : 'rgba(198,224,252,.22)');
-      g.addColorStop(1, light ? 'rgba(92,120,155,.14)' : 'rgba(170,205,245,0)');
-      cx.fillStyle = g;
-      cx.beginPath(); cx.ellipse(d.x, d.y, d.r, d.r * 1.25, 0, 0, 6.283); cx.fill();
-      if (light) {
-        cx.strokeStyle = 'rgba(80,108,142,.16)'; cx.lineWidth = .7;
-        cx.beginPath(); cx.ellipse(d.x, d.y, d.r, d.r * 1.25, 0, 0, 6.283); cx.stroke();
+      var br = b.r * (1 + Math.sin(b.ph) * .035);
+      drawDrop(cx, b.x, b.y, br, lit, .92);
+    }
+    // 滑落水珠
+    for (var j = 0; j < runners.length; j++) {
+      var d = runners[j], py = d.y;
+      d.wob += .014;
+      if (d.pause > 0) { d.pause -= 1; d.v *= .86; }        // 表面张力黏住
+      else {
+        d.v += .00055 * sp;                                  // 极缓的重力加速
+        if (Math.random() < .0022) d.pause = 12 + Math.random() * 70;
       }
-      cx.fillStyle = light ? 'rgba(255,255,255,.95)' : 'rgba(255,255,255,.34)';
-      cx.beginPath(); cx.arc(d.x - d.r * .32, d.y - d.r * .4, Math.max(.5, d.r * .22), 0, 6.283); cx.fill();
-      if (d.y - d.len > H + 30) drops[i] = mk(false);
+      var vmax = (.18 + d.r * .052) * sp;
+      if (d.v > vmax) d.v = vmax;
+      d.y += d.v * (1 + d.r / 9);
+      d.x += Math.sin(d.wob) * .10 + d.drift;
+      // 只有真正滑落的大水珠才留下极细的水痕（不把凝珠拉成泪滴）
+      if (d.y - py > .18 && d.r > 4) {
+        var len = Math.min(96, (d.y - py) + d.r * 1.6);
+        var g2 = tx.createLinearGradient(d.x, d.y - len, d.x, d.y);
+        g2.addColorStop(0, lit ? 'rgba(120,148,178,0)' : 'rgba(190,220,250,0)');
+        g2.addColorStop(1, lit ? 'rgba(112,140,172,.085)' : 'rgba(200,228,255,.075)');
+        tx.fillStyle = g2;
+        tx.fillRect(d.x - d.r * .11, d.y - len, d.r * .22, len);
+      }
+      // 汇流：吞并路径上的静态凝珠，自己长大、略加速
+      for (var k = 0; k < beads.length; k++) {
+        var q = beads[k];
+        var dx = q.x - d.x, dy = q.y - d.y;
+        if (dx * dx + dy * dy < (d.r + q.r) * (d.r + q.r) * 1.3) {
+          d.r = Math.min(15, d.r + q.r * .16); d.v += .01 * sp;
+          beads[k] = mkBead(false); beads[k].y = Math.min(H, d.y + 6); beads[k].x = d.x + (Math.random() - .5) * 30;
+        }
+      }
+      drawDrop(cx, d.x, d.y, d.r, lit, 1);
+      if (d.y - d.r > H + 24) runners[j] = mkRun(false);
     }
     raf = requestAnimationFrame(frame);
   }
@@ -1677,67 +1802,107 @@ function initIntro() {
     var s = Math.max(w / im.width, h / im.height), dw = im.width * s, dh = im.height * s;
     ctx.drawImage(im, (w - dw) / 2, (h - dh) / 2, dw, dh);
   }
-  /* 一抹：把雾层下的清晰底图「擦」出来 */
+  /* 一抹：把雾层下的清晰底图「擦」出来，边缘留一圈被推开的水膜 */
   function wipe(x, y, r) {
     if (!imgReady) return;
+    // 外圈：雾被抹开时略带半透明的水痕晕
+    var halo = cc.createRadialGradient(x, y, r * .78, x, y, r * 1.14);
+    halo.addColorStop(0, 'rgba(255,255,255,0)');
+    halo.addColorStop(.62, 'rgba(255,255,255,.10)');
+    halo.addColorStop(1, 'rgba(255,255,255,0)');
+    cc.fillStyle = halo; cc.beginPath(); cc.arc(x, y, r * 1.14, 0, 6.283); cc.fill();
     cc.save(); cc.beginPath(); cc.arc(x, y, r, 0, 6.283); cc.clip();
     drawCover(cc, img, W, H); cc.restore();
-    cc.save(); cc.strokeStyle = 'rgba(255,255,255,.13)'; cc.lineWidth = 2.2;
-    cc.beginPath(); cc.arc(x, y, r - 1, 0, 6.283); cc.stroke(); cc.restore();
+    cc.save();
+    cc.strokeStyle = 'rgba(255,255,255,.22)'; cc.lineWidth = 2.4;
+    cc.beginPath(); cc.arc(x, y, r - 1.2, 0, 6.283); cc.stroke();
+    cc.strokeStyle = 'rgba(120,148,178,.10)'; cc.lineWidth = 1;
+    cc.beginPath(); cc.arc(x, y, r + 1.5, 0, 6.283); cc.stroke();
+    cc.restore();
   }
 
-  /* 车窗雨滴：大小不一、打上瞬间的涟漪、缓慢滑落与水痕 */
-  var wet = [], WET_N = 0;
+  /* 车窗雨滴（仿真）：静态凝珠 + 打上涟漪 + 极缓间歇滑落 + 水痕 */
+  var wet = [], WET_N = 0, wetTrail = document.createElement('canvas'), wtc = wetTrail.getContext('2d');
   function mkWet(first) {
     return { x: Math.random() * W, y: first ? Math.random() * H : -30 - Math.random() * 60,
-      r: 1.4 + Math.pow(Math.random(), 2.2) * 13,
-      vy: 0, ripple: first ? Math.random() : 1, trail: 0, drift: (Math.random() - .5) * .22 };
+      r: 1.2 + Math.pow(Math.random(), 2.6) * 10.5,
+      vy: 0, ripple: first ? Math.random() : 1, trail: 0, drift: (Math.random() - .5) * .14,
+      hold: Math.random() * 70, ph: Math.random() * 6.28 };
   }
   function refillWet() {
-    WET_N = Math.min(150, Math.max(64, Math.round(W * H / 11000)));
+    WET_N = Math.min(170, Math.max(70, Math.round(W * H / 9200)));
     while (wet.length < WET_N) wet.push(mkWet(true));
     if (wet.length > WET_N) wet.length = WET_N;
   }
+  function resizeTrail() { wetTrail.width = Math.round(W * dpr); wetTrail.height = Math.round(H * dpr); wtc.setTransform(dpr, 0, 0, dpr, 0, 0); }
   function drawWet(alpha) {
     rc.clearRect(0, 0, W, H);
+    wtc.save(); wtc.globalCompositeOperation = 'destination-out';
+    wtc.fillStyle = 'rgba(0,0,0,.008)'; wtc.fillRect(0, 0, W, H); wtc.restore();
+    rc.save(); rc.globalAlpha = alpha * .9; rc.drawImage(wetTrail, 0, 0, W, H); rc.restore();
     rc.globalAlpha = alpha;
     for (var i = 0; i < wet.length; i++) {
-      var d = wet[i];
-      d.vy += .005 + d.r * .0006; d.y += d.vy * (1 + d.r / 9); d.x += d.drift;
-      d.trail = Math.min(96, d.trail + d.vy * 1.6);
-      if (d.ripple > 0) d.ripple -= .028;
-      // 打上玻璃的涟漪
+      var d = wet[i], py = d.y;
+      d.ph += .01;
+      if (d.hold > 0) { d.hold -= 1; d.vy *= .85; }
+      else { d.vy += .0008 + d.r * .00009; if (Math.random() < .002) d.hold = 10 + Math.random() * 60; }
+      var vmax = .14 + d.r * .035;
+      if (d.vy > vmax) d.vy = vmax;
+      d.y += d.vy * (1 + d.r / 11); d.x += d.drift + Math.sin(d.ph) * .05;
+      if (d.ripple > 0) d.ripple -= .026;
       if (d.ripple > 0) {
-        rc.strokeStyle = 'rgba(255,255,255,' + (d.ripple * .55) + ')';
-        rc.lineWidth = 1;
-        rc.beginPath(); rc.ellipse(d.x, d.y, d.r * (1 + (1 - d.ripple) * 2.4), d.r * (1 + (1 - d.ripple) * 2.4), 0, 0, 6.283); rc.stroke();
+        rc.strokeStyle = 'rgba(255,255,255,' + (d.ripple * .5) + ')'; rc.lineWidth = 1;
+        rc.beginPath(); rc.ellipse(d.x, d.y, d.r * (1 + (1 - d.ripple) * 2.6), d.r * (1 + (1 - d.ripple) * 2.6), 0, 0, 6.283); rc.stroke();
       }
-      // 滑落水痕
-      if (d.trail > 2) {
-        var g2 = rc.createLinearGradient(d.x, d.y - d.trail, d.x, d.y);
+      if (d.y - py > .18 && d.r > 3.4) {
+        var tl = Math.min(96, d.y - py + d.r * 1.5);
+        var g2 = wtc.createLinearGradient(d.x, d.y - tl, d.x, d.y);
         g2.addColorStop(0, 'rgba(120,148,178,0)');
-        g2.addColorStop(1, 'rgba(120,148,178,' + (.10 + d.r * .008) + ')');
-        rc.fillStyle = g2;
-        rc.fillRect(d.x - d.r * .3, d.y - d.trail, d.r * .6, d.trail);
+        g2.addColorStop(1, 'rgba(116,144,176,.08)');
+        wtc.fillStyle = g2; wtc.fillRect(d.x - d.r * .10, d.y - tl, d.r * .20, tl);
       }
-      // 水珠本体：凸透镜般的折射（亮心 + 冷灰边缘 + 底部暗影）
+      // 水珠本体：凸透镜折射（亮心 + 冷灰边缘 + 底部暗影）
+      var ry = d.r * 1.10;
       var g = rc.createRadialGradient(d.x - d.r * .34, d.y - d.r * .42, 0, d.x, d.y, d.r * 1.45);
-      g.addColorStop(0, 'rgba(255,255,255,.94)');
-      g.addColorStop(.34, 'rgba(228,238,249,.34)');
-      g.addColorStop(.78, 'rgba(128,156,188,.20)');
-      g.addColorStop(1, 'rgba(88,116,150,.06)');
+      g.addColorStop(0, 'rgba(255,255,255,.96)');
+      g.addColorStop(.30, 'rgba(226,238,250,.40)');
+      g.addColorStop(.74, 'rgba(128,156,188,.24)');
+      g.addColorStop(1, 'rgba(88,116,150,.08)');
       rc.fillStyle = g;
-      rc.beginPath(); rc.ellipse(d.x, d.y, d.r, d.r * 1.22, 0, 0, 6.283); rc.fill();
-      rc.strokeStyle = 'rgba(78,106,140,.22)'; rc.lineWidth = .7;
-      rc.beginPath(); rc.ellipse(d.x, d.y, d.r, d.r * 1.22, 0, 0, 6.283); rc.stroke();
+      rc.beginPath(); rc.ellipse(d.x, d.y, d.r, ry, 0, 0, 6.283); rc.fill();
+      rc.fillStyle = 'rgba(64,92,124,.14)';
+      rc.beginPath(); rc.ellipse(d.x, d.y + ry * .5, d.r * .7, ry * .3, 0, 0, 6.283); rc.fill();
+      rc.strokeStyle = 'rgba(78,106,140,.24)'; rc.lineWidth = .7;
+      rc.beginPath(); rc.ellipse(d.x, d.y, d.r, ry, 0, 0, 6.283); rc.stroke();
       rc.fillStyle = 'rgba(255,255,255,.95)';
       rc.beginPath(); rc.arc(d.x - d.r * .34, d.y - d.r * .44, Math.max(.6, d.r * .2), 0, 6.283); rc.fill();
-      if (d.y - d.trail > H + 40) wet[i] = mkWet(false);
+      if (d.y - d.r > H + 40) wet[i] = mkWet(false);
     }
     rc.globalAlpha = 1;
   }
 
-  var HOLD = 1250, WIPE_MS = 2650, t0 = performance.now(), fading = false;
+  /* ---- 手动擦除：累计擦开面积，达标才进入 ---- */
+  var NEED = Math.max(12, Math.min(75, Number(cfg.need == null ? 38 : cfg.need)));
+  var progress = 0, fading = false, last = null;
+  var progs = $('#introProg'), progBar = $('#introProgBar');
+  // 低分辨率擦除掩码：统计被擦开的比例
+  var mw = 48, mh = 84, mask = new Uint8Array(mw * mh), masked = 0;
+  function markMask(x, y, r) {
+    var x0 = Math.max(0, Math.floor((x - r) / W * mw)), x1 = Math.min(mw - 1, Math.ceil((x + r) / W * mw));
+    var y0 = Math.max(0, Math.floor((y - r) / H * mh)), y1 = Math.min(mh - 1, Math.ceil((y + r) / H * mh));
+    var r2 = r * r;
+    for (var gy = y0; gy <= y1; gy++) for (var gx = x0; gx <= x1; gx++) {
+      var k = gy * mw + gx; if (mask[k]) continue;
+      var cx = (gx + .5) / mw * W, cy = (gy + .5) / mh * H, dx = cx - x, dy = cy - y;
+      if (dx * dx + dy * dy <= r2) { mask[k] = 1; masked++; }
+    }
+  }
+  function updateProg() {
+    var p = masked / (mw * mh) * 100;
+    if (p > progress) progress = p;
+    if (progBar) progBar.style.width = Math.min(100, progress / NEED * 100) + '%';
+    if (progress >= NEED && !fading) reveal();
+  }
   function finish() {
     if (INTRO_DONE) return;
     INTRO_DONE = true;
@@ -1746,37 +1911,57 @@ function initIntro() {
     el.classList.add('done');
     setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 1250);
   }
-  function frame(now) {
-    var t = now - t0;
-    var p = Math.min(1, Math.max(0, (t - HOLD) / WIPE_MS));
-    drawWet(1 - p * .72);
-    if (t > HOLD && p < 1 && !fading) {
-      var rows = 5, q = p * rows, row = Math.min(rows - 1, Math.floor(q)), f = q - row;
-      var x = (row % 2 === 0 ? f : 1 - f) * W, y = (row + .5) / rows * H;
-      var r = Math.max(W, H) * .18;
-      wipe(x, y, r);
-      wipe(x + (row % 2 === 0 ? r * .62 : -r * .62), y + Math.sin(f * 6.283) * r * .34, r * .78);
-    }
-    if (p >= 1 && !fading) {
-      fading = true;
-      $('#introFog').classList.add('clear');
-      cc.clearRect(0, 0, W, H); drawCover(cc, img, W, H);
-      setTimeout(function () { var c = $('#introCenter'); if (c) c.classList.add('out'); }, 140);
-      setTimeout(finish, 1050);
-    }
+  function reveal() {
+    fading = true;
+    if (progs) progs.classList.add('done');
+    $('#introFog').classList.add('clear');
+    cc.clearRect(0, 0, W, H); drawCover(cc, img, W, H);
+    setTimeout(function () { var c = $('#introCenter'); if (c) c.classList.add('out'); }, 140);
+    setTimeout(finish, 1100);
+  }
+  function frame() {
+    drawWet(fading ? .3 : 1);
     INTRO_RAF = requestAnimationFrame(frame);
   }
-  function onWipe(e) {
-    var pts = e.touches ? e.touches : [e];
-    for (var i = 0; i < pts.length; i++) wipe(pts[i].clientX, pts[i].clientY, Math.max(W, H) * .115);
-    t0 -= 240;   // 手动擦会加速整段动画
+  var BR = function () { return Math.max(W, H) * .105; };
+  function wipeAt(x, y) {
+    if (!imgReady) return;                 // 底图未就绪时不擦、不记进度，避免无反馈
+    var r = BR();
+    wipe(x, y, r);
+    markMask(x, y, r * 1.12);
+    updateProg();
   }
-  resize(); refillWet();
-  window.addEventListener('resize', function () { resize(); refillWet(); cc.clearRect(0, 0, W, H); });
-  el.addEventListener('pointerdown', onWipe);
-  el.addEventListener('pointermove', function (e) { if (e.buttons || e.pressure) onWipe(e); });
-  el.addEventListener('touchmove', onWipe, { passive: true });
-  $('#introSkip').addEventListener('click', function (e) { e.stopPropagation(); finish(); });
+  // 连续轨迹插值：快速滑动也擦得连贯
+  function strokeTo(x, y) {
+    if (last) {
+      var dx = x - last.x, dy = y - last.y, dist = Math.hypot(dx, dy), step = BR() * .42;
+      var n = Math.min(24, Math.ceil(dist / step));
+      for (var i = 1; i <= n; i++) wipeAt(last.x + dx * i / n, last.y + dy * i / n);
+    } else wipeAt(x, y);
+    last = { x: x, y: y };
+  }
+  function pts(e) {
+    if (e.touches && e.touches.length) return Array.prototype.slice.call(e.touches);
+    if (e.changedTouches && e.changedTouches.length) return Array.prototype.slice.call(e.changedTouches);
+    return [e];
+  }
+  function onDown(e) { if (fading || INTRO_DONE) return; last = null; var p = pts(e); for (var i = 0; i < p.length; i++) wipeAt(p[i].clientX, p[i].clientY); last = { x: p[0].clientX, y: p[0].clientY }; }
+  function onMove(e) {
+    if (fading || INTRO_DONE) return;
+    if (e.cancelable && e.type === 'touchmove') e.preventDefault();
+    var p = pts(e);
+    for (var i = 0; i < p.length; i++) strokeTo(p[i].clientX, p[i].clientY);
+  }
+  function onUp() { last = null; }
+  resize(); resizeTrail(); refillWet();
+  window.addEventListener('resize', function () { resize(); resizeTrail(); refillWet(); cc.clearRect(0, 0, W, H); });
+  el.addEventListener('pointerdown', onDown);
+  el.addEventListener('pointermove', function (e) { if (e.buttons || e.pressure) onMove(e); });
+  el.addEventListener('pointerup', onUp); el.addEventListener('pointercancel', onUp);
+  el.addEventListener('touchstart', onDown, { passive: true });
+  el.addEventListener('touchmove', onMove, { passive: false });
+  el.addEventListener('touchend', onUp); el.addEventListener('touchcancel', onUp);
+  $('#introSkip').addEventListener('click', function (e) { e.stopPropagation(); if (!fading) reveal(); });
   INTRO_RAF = requestAnimationFrame(frame);
 }
 
