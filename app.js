@@ -187,12 +187,15 @@ function cloudBase() {
 }
 async function probeCloud() {
   if (READONLY) return;
+  // 用一个静态标记文件判断部署形态，避免在无接口的静态托管上产生 404 请求
   try {
-    var ep = cloudBase();
-    var sep = ep.indexOf('?') >= 0 ? '&' : '?';
-    var r = await fetch(ep + sep + 'ping=1', { method: 'GET' });
+    var dir = location.pathname.replace(/[^/]*$/, '');
+    var sep = location.search ? (location.search + '&') : '?';
+    var r = await fetch(location.origin + dir + 'cloud.json' + sep + '_=' + Date.now(), { method: 'GET' });
+    if (!r.ok) return;
     var j = await r.json();
-    if (r.ok && j && j.ok === true) AUTO_CLOUD = ep;
+    if (j && j.cloud === true) AUTO_CLOUD = cloudBase();
+    else AUTO_CLOUD = '';
   } catch (e) { AUTO_CLOUD = ''; }
 }
 
