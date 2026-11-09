@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="noir">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#070a10">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="厘子 · 病恋档案 / LÍ ZǏ — 一台只收一条信号的小手机">
+<title>厘 子 · 病恋档案</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 进场动画：起雾车窗 + 雨滴 + 擦玻璃 -->
+<div id="intro" class="intro">
+  <div class="introBg" id="introBg"></div>
+  <div class="introFog" id="introFog"></div>
+  <canvas id="introClear" class="introLayer"></canvas>
+  <canvas id="introRain" class="introLayer"></canvas>
+  <div class="introVignette"></div>
+  <div class="introCenter" id="introCenter">
+    <div class="introCross">✝</div>
+    <div class="introTitle" id="introTitle">厘 子</div>
+    <div class="introSub" id="introSub">LÍ ZǏ — 病恋档案</div>
+    <div class="introRule"></div>
+  </div>
+  <div class="introTip" id="introTip">轻触屏幕，擦去雾气</div>
+  <button class="introSkip" id="introSkip">跳过 †</button>
+</div>
+
+<div id="bgLayer"></div>
+<div id="bgDim"></div>
+<div id="glowA"></div><div id="glowB"></div>
+<canvas id="rain"></canvas>
+<div id="grain"></div>
+
+<div id="stage">
+  <div class="sideMark left"><i>†</i> CLINICAL NOTE · 0217</div>
+
+  <div class="phone" id="phone">
+    <div class="statusbar" id="statusbar"></div>
+    <div class="topbar" id="topbar"></div>
+
+    <div class="screen" id="screen">
+      <div class="page" data-page="album" id="page-album"></div>
+      <div class="page on" data-page="home" id="page-home"></div>
+      <div class="page" data-page="msg" id="page-msg"></div>
+      <div class="page" data-page="me" id="page-me"></div>
+      <div class="pageNav">
+        <button id="navPrev" aria-label="上一页"></button>
+        <button id="navNext" aria-label="下一页"></button>
+      </div>
+    </div>
+
+    <div class="editBar" id="editBar">
+      <button id="editPanelBtn" title="后台管理"></button>
+      <button id="editDoneBtn" title="退出编辑"></button>
+    </div>
+
+    <div class="tabbar" id="tabbar"></div>
+    <div class="homeBar"></div>
+  </div>
+
+  <div class="sideMark right">DO NOT DISTURB <i>✝</i></div>
+</div>
+
+<div class="readBadge" id="readBadge"><span>†</span> 只读快照 · READ ONLY</div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="admin" id="admin"></aside>
+
+<div class="lightbox" id="lightbox">
+  <img id="lbImg" alt="">
+  <div class="lbCap" id="lbCap"></div>
+  <div style="display:flex;gap:10px">
+    <button class="lbBtn" id="lbLink">↗ 打开链接</button>
+    <button class="lbBtn" id="lbClose">关闭</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<audio id="audio" preload="auto" playsinline webkit-playsinline></audio>
+<div id="musicFrame"></div>
+
+<script src="defaults.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
