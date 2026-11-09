@@ -52,6 +52,11 @@ const server = http.createServer((req, res) => {
   catch (e) { json(res, 400, { error: 'bad url' }); return; }
   const p = u.pathname;
 
+  // 静态托管会直接返回仓库里的 cloud.json（cloud:false）；Node 服务在此声明云端仓库可用
+  if (p === '/cloud.json' || p.endsWith('/cloud.json')) {
+    json(res, 200, { cloud: true, service: 'lizi-snapshot' }); return;
+  }
+
   if (p === '/api/snap' || p.endsWith('/api/snap')) {
     if (req.method === 'OPTIONS') { cors(res); res.writeHead(204); res.end(); return; }
     if (req.method === 'GET') {
