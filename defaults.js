@@ -1,6 +1,6 @@
 /* 厘子 · 病恋档案 —— 默认数据（所有字段均可在后台编辑） */
 window.DEFAULTS = {
-  version: 2,
+  version: 3,
   password: 'lizi0217',
   theme: 'glass',             // glass 透亮玻璃(默认) | blue | noir | mono | custom
   bgImage: '',                // 自定义背景图 dataURL
@@ -8,14 +8,16 @@ window.DEFAULTS = {
   bgDim: 10,
   rainOn: true,
   rainLevel: 70,
+  rainSpeed: 42,              // 雨滴滑落速度（10 极慢 ~ 100 原速）
 
   intro: {
     on: true,
     image: 'assets/intro.jpg',   // 进场底图（可在后台换成相册图片）
     title: '厘 子',
     sub: 'LÍ ZǏ — 病恋档案',
-    tip: '轻触屏幕，擦去雾气',
-    skip: '跳过 †'
+    tip: '用手指或鼠标，擦去玻璃上的雾',
+    skip: '跳过 †',
+    need: 38                    // 擦除达到该比例(%)后进入
   },
 
   status: {
@@ -61,10 +63,10 @@ window.DEFAULTS = {
     title: '相册 · ARCHIVE',
     hint: '点击图片放大 · 右上角 ↗ 可跳转',
     items: [
-      { img: '', text: '窗上的雨，替我记了日期。', link: '', showLink: false, linkLabel: '↗' },
-      { img: '', text: '十字架落在锁骨的位置。', link: '', showLink: false, linkLabel: '↗' },
-      { img: '', text: '蓝屏之前的最后一次存档。', link: '', showLink: false, linkLabel: '↗' },
-      { img: '', text: '她没有回信，但信号一直亮着。', link: '', showLink: false, linkLabel: '↗' }
+      { img: 'assets/album1.jpg', text: 'You and Me, for every day. †', link: '', showLink: false, linkLabel: '↗' },
+      { img: 'assets/album2.jpg', text: '乘风破浪，也只是一张旧素描。', link: '', showLink: false, linkLabel: '↗' },
+      { img: 'assets/album3.jpg', text: 'Finance · 一封没有寄出的旅行票。', link: '', showLink: false, linkLabel: '↗' },
+      { img: 'assets/album4.jpg', text: 'Midnights · 把想念刻进唱片的纹路。', link: '', showLink: false, linkLabel: '↗' }
     ]
   },
 
@@ -85,12 +87,12 @@ window.DEFAULTS = {
       { text: '离线中 / OFFLINE BUT AWAKE', link: '' }
     ],
     music: {
-      title: '未载入音轨',
-      artist: '插入音乐链接后自动播放',
-      url: '',
-      cover: '',
+      title: '未寄出的录音',
+      artist: '厘子 · 内置音轨',
+      url: 'assets/bgm.mp3',
+      cover: 'assets/album4.jpg',
       auto: true,
-      mode: 'link'
+      mode: 'file'
     }
   },
 
